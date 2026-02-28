@@ -13,6 +13,45 @@ Module Program
     "U002;Erika Musterfrau|" &
     "U003;Hans Meier|" &
     "U004;Laura Schmidt"
+
+    ''' ----------------------------------------------------------
+    ''' <summary>
+    ''' Zeigt alle im System hinterlegten Benutzer an.
+    ''' Die Benutzerdaten werden aus den Testdaten eingelesen
+    ''' und formatiert auf der Konsole ausgegeben.
+    ''' </summary>
+    ''' <remarks>
+    ''' Es werden die vorhandenen Testdaten verwendet.
+    ''' </remarks>
+    Sub ShowUsers()
+
+        ' Testdaten in Array aufteilen
+        Dim users() As String = usrTestData.Split("|"c)
+
+        ' Schleife über alle Benutzer
+        For i As Integer = 0 To users.Length - 1
+
+            ' Benutzer in ID und Name aufteilen
+            Dim details() As String = users(i).Split(";"c)
+
+            Console.WriteLine("Benutzer-ID: " & details(0))
+            Console.WriteLine("Name: " & details(1))
+            Console.WriteLine("----------------------------")
+
+        Next
+
+    End Sub
+
+    ''' ----------------------------------------------------------
+    ''' <summary>
+    ''' Hauptsteuerung des Programms.
+    ''' Zeigt das Konsolenmenü an, verarbeitet die Benutzereingaben
+    ''' und ruft je nach Auswahl die entsprechenden Funktionen auf.
+    ''' </summary>
+    ''' <remarks>
+    ''' Das Menü läuft in einer While-Schleife,
+    ''' bis der Benutzer das Programm beendet.
+    ''' </remarks>
     Sub Main()
 
         Dim running As Boolean = True
@@ -72,16 +111,7 @@ Module Program
 
             ElseIf input = "3" Then
 
-                Dim users() As String = usrTestData.Split("|"c)
-
-                For i As Integer = 0 To users.Length - 1
-
-                    Dim details() As String = users(i).Split(";"c)
-
-                    Console.WriteLine("Benutzer-ID: " & details(0))
-                    Console.WriteLine("Name: " & details(1))
-                    Console.WriteLine("----------------------------")
-                Next
+                ShowUsers()
 
             ElseIf input = "4" Then
                 Console.WriteLine("Buch ausleihen gewählt.")
