@@ -96,6 +96,7 @@ Module Program
             Console.WriteLine("2 - Alle Benutzer anzeigen")
             Console.WriteLine("3 - Buch ausleihen")
             Console.WriteLine("4 - Buch zurückgeben")
+            Console.WriteLine("5 - Benutzer anlegen")
             Console.WriteLine("0 - Beenden")
             Console.Write("Auswahl: ")
 
@@ -182,6 +183,42 @@ Module Program
 
                 If Not bookFound Then
                     Console.WriteLine("Buch nicht gefunden.")
+                End If
+
+            ElseIf input = "5" Then
+
+                If users.Length >= 999 Then
+                    Console.WriteLine("Maximale Anzahl von 999 Benutzern erreicht.")
+                Else
+
+                    Console.Write("Neue Benutzer-ID: ")
+                    Dim newId As String = Console.ReadLine().Trim()
+
+                    Console.Write("Name: ")
+                    Dim newName As String = Console.ReadLine().Trim()
+
+                    ' Prüfen ob ID bereits existiert
+                    Dim exists As Boolean = False
+
+                    For i As Integer = 0 To users.Length - 1
+                        If users(i).ID = newId Then
+                            exists = True
+                            Exit For
+                        End If
+                    Next
+
+                    If exists Then
+                        Console.WriteLine("Benutzer-ID existiert bereits.")
+                    Else
+                        ' Array vergrößern
+                        ReDim Preserve users(users.Length)
+
+                        users(users.Length - 1).ID = newId
+                        users(users.Length - 1).Name = newName
+
+                        Console.WriteLine("Benutzer erfolgreich angelegt.")
+                    End If
+
                 End If
 
             ElseIf input = "0" Then
