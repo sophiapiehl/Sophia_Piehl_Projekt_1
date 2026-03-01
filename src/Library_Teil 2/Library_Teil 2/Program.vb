@@ -94,6 +94,8 @@ Module Program
             Console.WriteLine("===== Bibliothekssystem =====")
             Console.WriteLine("1 - Alle Bücher anzeigen")
             Console.WriteLine("2 - Alle Benutzer anzeigen")
+            Console.WriteLine("3 - Buch ausleihen")
+            Console.WriteLine("4 - Buch zurückgeben")
             Console.WriteLine("0 - Beenden")
             Console.Write("Auswahl: ")
 
@@ -112,6 +114,75 @@ Module Program
                     Console.WriteLine(users(i).ID & " | " &
                                       users(i).Name)
                 Next
+
+            ElseIf input = "3" Then
+                Console.Write("Benutzer-ID eingeben: ")
+                Dim userId As String = Console.ReadLine().Trim()
+
+                Console.Write("ISBN eingeben: ")
+                Dim isbn As String = Console.ReadLine().Trim()
+
+                ' Ausleihe prüfen
+                Dim userFound As Boolean = False
+                Dim bookFound As Boolean = False
+
+                For i As Integer = 0 To users.Length - 1
+                    If users(i).ID = userId Then
+                        userFound = True
+                        Exit For
+                    End If
+                Next
+
+                For i As Integer = 0 To books.Length - 1
+                    If books(i).ISBN = isbn Then
+                        bookFound = True
+
+                        If books(i).Status = "available" Then
+                            books(i).Status = "borrowed"
+                            Console.WriteLine("Buch erfolgreich ausgeliehen.")
+                        Else
+                            Console.WriteLine("Buch ist bereits ausgeliehen.")
+                        End If
+
+                        Exit For
+                    End If
+                Next
+
+                If Not userFound Then
+                    Console.WriteLine("Benutzer nicht gefunden.")
+                End If
+
+                If Not bookFound Then
+                    Console.WriteLine("Buch nicht gefunden.")
+                End If
+
+            ElseIf input = "4" Then
+
+                Console.Write("ISBN eingeben: ")
+                Dim isbn As String = Console.ReadLine().Trim()
+
+                Dim bookFound As Boolean = False
+
+                For i As Integer = 0 To books.Length - 1
+
+                    If books(i).ISBN = isbn Then
+                        bookFound = True
+
+                        If books(i).Status = "borrowed" Then
+                            books(i).Status = "available"
+                            Console.WriteLine("Buch erfolgreich zurückgegeben.")
+                        Else
+                            Console.WriteLine("Buch war nicht ausgeliehen.")
+                        End If
+
+                        Exit For
+                    End If
+
+                Next
+
+                If Not bookFound Then
+                    Console.WriteLine("Buch nicht gefunden.")
+                End If
 
             ElseIf input = "0" Then
                 running = False
