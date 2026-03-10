@@ -1,9 +1,11 @@
-Programmentwurf – Bibliothekssystem
+Bibliothekssystem in VB.NET
 
-Ziel
-Entwicklung eines Bibliothekssystems in VB.NET.
+Funktionen:
+- BÃ¼cher anzeigen
+- Benutzer anzeigen
+- Buch ausleihen
+- Buch zurÃ¼ckgeben
+- Benutzer anlegen
+- ausgeliehene BÃ¼cher eines Benutzers anzeigen
 
-Funktionen (geplant)
-- Bücher verwalten
-- Kunden verwalten
-- Ausleihen verwalten 
+Daten werden aus CSV-Dateien geladen.
